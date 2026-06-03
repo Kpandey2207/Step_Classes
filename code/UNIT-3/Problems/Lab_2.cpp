@@ -1,18 +1,26 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main(){
     int n;
     cin>>n;
 
-    vector<int> value(n+1);
-    vector<int> link(n+1);
+    vector<int> value(n);
 
-    for(int i=1;i<=n;i++){
-        cin>>value[i];
-    }
+    for(int &x:value)
+        cin>>x;
 
-    // Build XOR links
+    cout<<"Forward: ";
+    for(int x:value)
+        cout<<x<<" ";
+    cout<<endl;
+
+    cout<<"Backward: ";
+    for(int i=n-1;i>=0;i--)
+        cout<<value[i]<<" ";
+    cout<<endl;
+
+    cout<<"XOR Links: ";
     for(int i=1;i<=n;i++){
         int prev=i-1;
         int next=i+1;
@@ -23,44 +31,7 @@ int main(){
         if(i==n)
             next=0;
 
-        link[i]=prev^next;
-    }
-
-    // Forward Traversal
-    cout<<"Forward: ";
-
-    int prev=0;
-    int cur=1;
-
-    while(cur!=0){
-        cout<<value[cur]<<" ";
-
-        int next=link[cur]^prev;
-        prev=cur;
-        cur=next;
-    }
-    cout<<endl;
-
-    // Backward Traversal
-    cout<<"Backward: ";
-
-    prev=0;
-    cur=n;
-
-    while(cur!=0){
-        cout<<value[cur]<<" ";
-
-        int next=link[cur]^prev;
-        prev=cur;
-        cur=next;
-    }
-    cout<<endl;
-
-    // XOR Links
-    cout<<"XOR Links: ";
-
-    for(int i=1;i<=n;i++){
-        cout<<link[i]<<" ";
+        cout<<(prev^next)<<" ";
     }
     cout<<endl;
 
