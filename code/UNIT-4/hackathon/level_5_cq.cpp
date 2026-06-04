@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void enqueue(vector<string>&buffer, int 
-
 int main(){
     int C, n;
     cin>>C>>n;
