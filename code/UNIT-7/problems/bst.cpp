@@ -158,7 +158,42 @@ public:
         return search(root->right, key);
     }
 
-    
+    // Moris Traversal
+
+    vector<int> morisInorder(TreeNode* root){
+        TreeNode* curr=root;
+        vector<int>result;
+
+        while(curr!=NULL){
+            // Inoder = Left->Root->Right
+            //Go to leftmost node and store it and move right
+            if(curr->left==NULL){
+                result.push_back(curr->data);
+                curr=curr->right;
+            }
+            else{
+                TreeNode* left_sub=curr->left;
+                //Go to rightmost node of left Subtree
+                while(left_sub->right && left_sub->right!=curr)
+                    left_sub=left_sub->right;
+
+                //Make rightmost node of left_sub point to current node
+                if(left_sub->right==NULL){
+                    left_sub->right=curr;
+                    curr=curr->left; // shift current to left
+                }
+                //If rightmode node if already point to current node
+                //then we need to break the link and move current to right
+                else{
+                    left_sub->right=NULL; // break the link
+                    result.push_back(curr->data);
+                    curr=curr->right; // shift current to right
+                }
+                
+            }
+        }
+        return result;
+    }
 
 };
 
